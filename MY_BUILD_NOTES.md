@@ -20,6 +20,7 @@
 | zram-swap | `=m` | 已禁用 |
 | OpenClash | 无 | `=y` |
 | Nikki | 无 | `=y` (与 OpenClash 共存) |
+| usbmuxd/usbutils | `=y` | `=n` (libudev 不可用) |
 
 ### `nss.config`
 | 修改 | 原值 | 新值 |
