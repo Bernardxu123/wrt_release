@@ -11,34 +11,42 @@
 
 ---
 
-## 本次修改 (2026-01-11)
+## 本次修改
 
 ### `jdcloud_ipq60xx_libwrt.config`
-| 修改 | 原值 | 新值 |
+| 修改 | 新值 | 原因 |
 | :-- | :-- | :-- |
-| 编译设备 | 4个全开 | 只保留 `jdcloud_re-ss-01` |
-| zram-swap | `=m` | 已禁用 |
-| OpenClash | 无 | `=y` |
-| Nikki | 无 | `=y` (与 OpenClash 共存) |
-| usbmuxd/usbutils | `=y` | `=n` (libudev 不可用) |
+| 编译设备 | 只保留 `jdcloud_re-ss-01` | 只需亚瑟 |
+| zram-swap | `=n` | 1GB 不需要 |
+| usbmuxd/usbutils | `=n` | libudev 不可用 |
+| luci-app-diskman | `=n` | libncursesw6 不可用 |
+| luci-app-quickfile | `=n` | nginx 不可用 |
+| luci-app-upnp | `=n` | miniupnpd 不可用 |
+
+### `proxy.config` (代理应用集中管理)
+| 包 | 状态 |
+| :-- | :-- |
+| Passwall | `=y` (项目默认) |
+| OpenClash | `=y` (已添加) |
+| Nikki | `=y` (已添加) |
 
 ### `nss.config`
-| 修改 | 原值 | 新值 |
-| :-- | :-- | :-- |
-| IPQ 内存 | `MEM_PROFILE_256` | `MEM_PROFILE_1024` |
-| ATH11K 内存 | `MEM_PROFILE_512M` | `MEM_PROFILE_1G` |
+| 修改 | 新值 |
+| :-- | :-- |
+| IPQ 内存 | `MEM_PROFILE_1024` |
+| ATH11K 内存 | `MEM_PROFILE_1G` |
 
 ---
 
-## 关键注意事项
+## ⚠️ LiBwrt 中不可用的依赖 (别尝试启用这些)
+- `libudev` → usbutils, usbmuxd
+- `libncursesw6` → diskman
+- `nginx` / `uci-firewall` → quickfile
+- `miniupnpd` → upnp
 
-### ⚠️ 与 NSS 冲突的功能（不要启用）
-- `kmod-tcp-bbr` - NSS 绑过内核 TCP 栈
-- `luci-app-turboacc` - 与 NSS 硬件加速冲突
-
-### ✅ 原始项目已包含的功能
-- Passwall、Mosdns、SmartDNS、SQM
-- Docker 依赖（按需 opkg 安装）
+## ⚠️ 与 NSS 冲突的功能 (别启用)
+- `kmod-tcp-bbr`
+- `luci-app-turboacc`
 
 ---
 
