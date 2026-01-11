@@ -19,6 +19,7 @@
 | 编译设备 | 4个全开 | 只保留 `jdcloud_re-ss-01` |
 | zram-swap | `=m` | 已禁用 |
 | OpenClash | 无 | `=y` |
+| Nikki | 无 | `=y` (与 OpenClash 共存) |
 
 ### `nss.config`
 | 修改 | 原值 | 新值 |
